@@ -4,28 +4,41 @@
 #include "DxLib.h"
 
 SDL_Surface *screen;
+bool SDLInitFlg = false;
+int SDLFullScreenState = FALSE;
 
 int DxLib_init()
 {
 
 	int ech = 0;
 
+	if( SDLInitFlg != false) return -1;
+	SDLInitFlg = true;	//フラグ立て
+
 	SDL_Init(SDL_INIT_EVERYTHING);
-	printf("Initialize\n");
-	
-	
 	atexit( DxLib_End);
 	
 	screen = SDL_SetVideoMode( 640, 480, 8, SDL_SWSURFACE);
+	
+	/* フルスクリーンモード切り替え */
+	if( SDLFullScreenState == FALSE){
+		ChangeWindowMode( TRUE );
+	}
+	
+	/* メッセージ */
+	printf("Initialize\n");	
 
 	return ech;
 }
 
 void DxLib_End(){
 	
-	
+	if( SDLInitFlg != true) return ;
+		
 	SDL_Quit();
 	printf("Quit\n");
+	
+	SDLInitFlg = false;
 	
 	return;
 }
@@ -96,4 +109,40 @@ int GetColor( int Red , int Green , int Blue )
 {
 	
 	return (int)(SDL_MapRGB( screen->format, Red,Green,Blue));
+}
+
+int DrawLine( int x1 , int y1 , int x2 , int y2 , int Color )
+{
+	int ech = 0; // エラーチェック変数
+	
+	
+	return 0;
+}
+
+int ChangeWindowMode( int Flag )
+{
+	int ech = 0;
+	
+	/* 初期化前に呼び出したら */
+	if( SDLInitFlg == false){
+		
+		SDLFullScreenState = Flag;
+		return ech;
+	}
+	
+	if( Flag != SDLFullScreenState)
+	{
+		SDL_WM_ToggleFullScreen( screen);
+	}
+
+	return ech;
+}
+
+int	SetMousePoint( int PointX , int PointY )
+{
+	int ech = 0;
+
+	SDL_WarpMouse( PointX, PointY);
+
+	return ech;
 }
