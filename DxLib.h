@@ -15,5 +15,7 @@ int GetColor( int Red, int Green, int Blue);
 int DrawBox( int x1 , int y1 , int x2 , int y2 , int Color , int FillFlag ) ;
 int ChangeWindowMode( int Flag );
 int	SetMousePoint( int PointX , int PointY );
+int	SetGraphMode( int SizeX , int SizeY , int ColorBitNum );
+int SetWindowSizeChangeEnableFlag( int Flag );
 
 #endif

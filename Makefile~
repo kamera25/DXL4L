@@ -20,5 +20,3 @@ font.o: DxLib.h
 clean:
 	rm -f *.o
 	rm -f libDxLib.so
-
-

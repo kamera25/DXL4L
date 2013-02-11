@@ -1,11 +1,20 @@
 // main.c
 #include <stdio.h>
 #include "SDL/SDL.h"
+#include <SDL/SDL_ttf.h>
 #include "DxLib.h"
 
 SDL_Surface *screen;
 bool SDLInitFlg = false;
 int SDLFullScreenState = FALSE;
+
+TTF_Font* font;
+SDL_Surface *image;
+SDL_Rect rect, scr_rect;
+
+int WindowWidth = 640;
+int WindowHeight = 480;
+int WindowFixingFlg = FALSE;
 
 int DxLib_init()
 {
@@ -18,7 +27,19 @@ int DxLib_init()
 	SDL_Init(SDL_INIT_EVERYTHING);
 	atexit( DxLib_End);
 	
-	screen = SDL_SetVideoMode( 640, 480, 8, SDL_SWSURFACE);
+	/* フォント関連の処理 */
+	ech = TTF_Init();
+	if(ech == -1){
+		return -1;
+	}
+	atexit( TTF_Quit);
+	
+	/* フォントの読み込み */
+	font = TTF_OpenFont( "monospace", 24);
+	//テスト!!
+	//image = TTF_RenderUF8_Blended( font, "こんにちは", white);
+	
+	SetGraphMode( WindowWidth, WindowHeight, 0);
 	
 	/* フルスクリーンモード切り替え */
 	if( SDLFullScreenState == FALSE){
@@ -35,13 +56,25 @@ void DxLib_End(){
 	
 	if( SDLInitFlg != true) return ;
 		
-	SDL_Quit();
+	//テスト	
+	//SDL_FreeSurface(image);
+	TTF_CloseFont(font);
+		
+	TTF_Quit();// ttf開放	
+	SDL_Quit();// 本体開放
+	
+	
+
+	
+	
 	printf("Quit\n");
 	
 	SDLInitFlg = false;
 	
 	return;
 }
+
+
 
 int WaitTimer( int WaitTime)
 {
@@ -54,7 +87,7 @@ int WaitTimer( int WaitTime)
 	}
 	
 	printf("%d\n", UsWT);
-	SDL_Delay(3000);
+	SDL_Delay(30000);
 	
 	return ech;
 }
@@ -144,5 +177,54 @@ int	SetMousePoint( int PointX , int PointY )
 
 	SDL_WarpMouse( PointX, PointY);
 
+	return ech;
+}
+
+
+int	SetGraphMode( int SizeX , int SizeY , int ColorBitNum )
+{
+	int ech = DX_CHANGESCREEN_OK;
+	
+	/* 初期化前に呼び出したら */
+	if( SDLInitFlg == false){
+		WindowWidth = SizeX;
+		WindowHeight = SizeY;
+		return DX_CHANGESCREEN_OK;
+	}
+	
+	screen = SDL_SetVideoMode( SizeX, SizeY, 8, SDL_SWSURFACE);
+	WindowWidth = SizeX;
+	WindowHeight = SizeY;
+	
+	return ech;
+	
+} 
+
+int SetWindowSizeChangeEnableFlag( int Flag )
+{
+	
+	int ech = 0;
+	
+	/* 初期化前に呼び出したら */
+	if( SDLInitFlg == false){
+		
+		return -1;
+	}
+	
+	
+	if( Flag != WindowFixingFlg)
+	{	
+		if( Flag == TRUE)// サイズ変更できるようにする
+		{
+			screen = SDL_SetVideoMode( WindowWidth, WindowHeight, 8, SDL_SWSURFACE | SDL_RESIZABLE);
+			WindowFixingFlg = TRUE;
+		}
+		else{ // サイズ変更不可にする
+			screen = SDL_SetVideoMode( WindowWidth, WindowHeight, 8, SDL_SWSURFACE);
+			WindowFixingFlg = FALSE;
+		}
+	}
+	
+	
 	return ech;
 }
