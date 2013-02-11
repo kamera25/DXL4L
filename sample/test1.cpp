@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include <stdio.h>
 
 int main(void)
 {
@@ -13,6 +14,10 @@ int main(void)
 
 	
 	SetMousePoint(10, 10);
+	DATEDATA tm;
+	GetDateTime( &tm );
+	printf("%d年%d月%d日\n", tm.Year, tm.Mon, tm.Day);
+	
 	
 	WaitTimer(1000);
 	DxLib_End();

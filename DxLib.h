@@ -7,6 +7,16 @@
 #define FALSE 0
 #define TRUE 1
 
+struct DATEDATA{
+	int Year;
+	int Mon;
+	int Day;
+	int Hour;
+	int Min;
+	int Sec;
+};
+
+
 int DxLib_init();
 void DxLib_End();
 int WaitTimer( int WaitTime);
@@ -17,5 +27,11 @@ int ChangeWindowMode( int Flag );
 int	SetMousePoint( int PointX , int PointY );
 int	SetGraphMode( int SizeX , int SizeY , int ColorBitNum );
 int SetWindowSizeChangeEnableFlag( int Flag );
+int ClearDrawScreen(void);
+int SetBackgroundColor( int Red, int Green, int Blue ) ;
+
+/* 時間(Time)関連 */
+int	GetNowCount( void );
+int	GetDateTime( DATEDATA *DateBuf );
 
 #endif

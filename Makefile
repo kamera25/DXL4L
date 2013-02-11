@@ -2,7 +2,7 @@
 
 #マクロ定義部
 CC	= g++
-OBJS	= main.o font.o
+OBJS	= main.o font.o time.o
 LIB = -lSDL -lSDL_ttf
 
 
@@ -16,6 +16,8 @@ libDxLib.so: $(OBJS)
 main.o: DxLib.h 
 
 font.o: DxLib.h
+
+time.o: DxLib.h
 
 clean:
 	rm -f *.o

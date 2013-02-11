@@ -15,6 +15,7 @@ SDL_Rect rect, scr_rect;
 int WindowWidth = 640;
 int WindowHeight = 480;
 int WindowFixingFlg = FALSE;
+Uint32 WindowBGColor = 0;
 
 int DxLib_init()
 {
@@ -40,6 +41,9 @@ int DxLib_init()
 	//image = TTF_RenderUF8_Blended( font, "こんにちは", white);
 	
 	SetGraphMode( WindowWidth, WindowHeight, 0);
+	
+	/* 背景色を黒にする */
+	SetBackgroundColor( 0, 0, 0);
 	
 	/* フルスクリーンモード切り替え */
 	if( SDLFullScreenState == FALSE){
@@ -79,15 +83,14 @@ void DxLib_End(){
 int WaitTimer( int WaitTime)
 {
 	int ech = 0;
-	Uint32 UsWT = (Uint32)WaitTimer;
+	Uint32 UsWT = (Uint32)WaitTime;
 	
 	if( WaitTimer < 0)
 	{
 			return -1;
 	}
 	
-	printf("%d\n", UsWT);
-	SDL_Delay(30000);
+	SDL_Delay(UsWT);
 	
 	return ech;
 }
@@ -225,6 +228,24 @@ int SetWindowSizeChangeEnableFlag( int Flag )
 		}
 	}
 	
+	
+	return ech;
+}
+
+int ClearDrawScreen(void)
+{
+	int ech = 0;
+	
+	DrawBox( 0, 0, WindowWidth, WindowHeight, WindowBGColor, TRUE);
+	
+	return ech;
+}
+
+int SetBackgroundColor( int Red, int Green, int Blue ) 
+{
+	int ech = 0;
+	
+	WindowBGColor = GetColor( Red, Green, Blue);
 	
 	return ech;
 }
