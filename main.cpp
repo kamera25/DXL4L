@@ -129,15 +129,9 @@ int DrawBox( int x1 , int y1 , int x2 , int y2 ,
 	sr.y = y1;
 	sr.w = x2 - x1;
 	sr.h = y2 - y1;
-	
-	scol.r = 255;
-	scol.g = 255;
-	scol.b = 255;
 
 	//SDL_FillRect( screen, &sr, SDL_MapRGB( screen->format, 255,255,255));
 	SDL_FillRect( screen, &sr, col);
-	SDL_Flip( screen);
-
 	return ech;
 }
 
@@ -147,13 +141,13 @@ int GetColor( int Red , int Green , int Blue )
 	return (int)(SDL_MapRGB( screen->format, Red,Green,Blue));
 }
 
-int DrawLine( int x1 , int y1 , int x2 , int y2 , int Color )
+/*int DrawLine( int x1 , int y1 , int x2 , int y2 , int Color )
 {
 	int ech = 0; // エラーチェック変数
 	
 	
 	return 0;
-}
+}*/
 
 int ChangeWindowMode( int Flag )
 {
@@ -246,6 +240,15 @@ int SetBackgroundColor( int Red, int Green, int Blue )
 	int ech = 0;
 	
 	WindowBGColor = GetColor( Red, Green, Blue);
+	
+	return ech;
+}
+
+int	ScreenFlip( void )
+{
+	int ech = 0;
+	
+	ech = SDL_Flip( screen);
 	
 	return ech;
 }

@@ -2,8 +2,8 @@
 
 #マクロ定義部
 CC	= g++
-OBJS	= main.o font.o time.o
-LIB = -lSDL -lSDL_ttf
+OBJS	= main.o font.o time.o dsharp.o
+LIB = -lSDL -lSDL_ttf -lSDL_gfx
 
 
 #生成規則部
@@ -18,6 +18,8 @@ main.o: DxLib.h
 font.o: DxLib.h
 
 time.o: DxLib.h
+
+dsharp.o: DxLib.h
 
 clean:
 	rm -f *.o

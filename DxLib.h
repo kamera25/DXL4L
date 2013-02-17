@@ -7,6 +7,8 @@
 #define FALSE 0
 #define TRUE 1
 
+
+
 struct DATEDATA{
 	int Year;
 	int Mon;
@@ -29,6 +31,13 @@ int	SetGraphMode( int SizeX , int SizeY , int ColorBitNum );
 int SetWindowSizeChangeEnableFlag( int Flag );
 int ClearDrawScreen(void);
 int SetBackgroundColor( int Red, int Green, int Blue ) ;
+
+int ScreenFlip( void );
+
+int DrawLine( int x1 , int y1 , int x2 , int y2 , int Color ) ;
+
+/* 図形関係 */
+int DrawPixel( int x , int y , int Color );
 
 /* 時間(Time)関連 */
 int	GetNowCount( void );
