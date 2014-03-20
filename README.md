@@ -1,5 +1,5 @@
-#Recomend!!!
-YOU SHULD USE [DXPortLib](https://github.com/mauvecow/DxPortLib), if you want use Dxlib on Linux or Mac. it is almost implement some functions of Dxlib!!
+#Recommend!!!
+YOU SHULD USE [DXPortLib](https://github.com/mauvecow/DxPortLib), if you want use Dxlib on Linux or Mac. It is almost implement some functions of Dxlib!!
 
 
 # What is DXL4L?
