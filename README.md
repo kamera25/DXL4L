@@ -1,3 +1,7 @@
+#Recomend!!!
+YOU SHULD USE [DXPortLib](https://github.com/mauvecow/DxPortLib), if you want use Dxlib on Linux or Mac. it is almost implement some functions of Dxlib!!
+
+
 # What is DXL4L?
 
 DXL4L is Library for Gaming Library.It is an acronym for DXLib for Lite/Linux/sdL.
